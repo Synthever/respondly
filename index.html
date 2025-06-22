@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Respondly - Find the right voices for your questions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>        /* Glass morphism effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.25);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.15);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+        
+        .liquid-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .liquid-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
+            animation: liquidMove 20s ease-in-out infinite;
+        }
+        
+        @keyframes liquidMove {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(120deg); }
+            66% { transform: translate(-20px, 20px) rotate(240deg); }
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 50%, #4facfe 100%);
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .btn-glass {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-glass:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .feature-icon {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translate(0, 0px); }
+            50% { transform: translate(0, -20px); }
+            100% { transform: translate(0, -0px); }
+        }
+          .nav-blur {
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.8);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Gradient backgrounds for icons */
+        .bg-gradient-1 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .bg-gradient-2 {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .bg-gradient-3 {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .bg-gradient-4 {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        }
+        
+        .bg-gradient-5 {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        }
+        
+        /* Animation delays */
+        .delay-2s {
+            animation-delay: -2s;
+        }
+        
+        .delay-4s {
+            animation-delay: -4s;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Navigation -->
+    <nav class="nav-blur fixed top-0 w-full z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <div class="text-2xl font-bold text-gradient">Respondly</div>
+                    <div class="ml-2 text-sm text-gray-600 hidden sm:block">Find the right voices</div>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#beranda" class="text-gray-700 hover:text-blue-600 transition-colors">Beranda</a>
+                    <a href="#fitur" class="text-gray-700 hover:text-blue-600 transition-colors">Fitur</a>
+                    <a href="#cara-kerja" class="text-gray-700 hover:text-blue-600 transition-colors">Cara Kerja</a>
+                    <a href="#tentang" class="text-gray-700 hover:text-blue-600 transition-colors">Tentang</a>
+                    <a href="#kontak" class="text-gray-700 hover:text-blue-600 transition-colors">Kontak</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="text-gray-700 hover:text-blue-600 transition-colors">Masuk</button>
+                    <button class="btn-glass px-6 py-2 rounded-full text-gray-800 font-medium">Daftar</button>
+                </div>
+                <div class="md:hidden">
+                    <button class="text-gray-700">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="beranda" class="liquid-bg min-h-screen flex items-center justify-center relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="text-center">
+                <div class="hero-title mb-6">
+                    <h1 class="text-5xl md:text-7xl font-bold text-white mb-4 leading-tight">
+                        <span class="block">Find the right</span>
+                        <span class="block text-gradient">voices</span>
+                        <span class="block">for your questions</span>
+                    </h1>
+                </div>
+                <div class="hero-subtitle">
+                    <p class="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed">
+                        Platform yang menghubungkan pembuat kuisioner dengan responden yang tepat sasaran. 
+                        Dapatkan data berkualitas untuk riset Anda dengan mudah dan cepat.
+                    </p>
+                </div>
+                <div class="hero-buttons flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <button class="btn-glass px-8 py-4 rounded-full text-white font-semibold text-lg hover:scale-105 transition-transform">
+                        <i class="fas fa-rocket mr-2"></i>
+                        Mulai Sekarang
+                    </button>
+                    <button class="btn-glass px-8 py-4 rounded-full text-white font-semibold text-lg hover:scale-105 transition-transform">
+                        <i class="fas fa-play mr-2"></i>
+                        Lihat Demo
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Floating Elements -->
+        <div class="absolute top-20 left-10 floating">
+            <div class="glass-card w-16 h-16 rounded-full flex items-center justify-center">
+                <i class="fas fa-users text-2xl feature-icon"></i>
+            </div>
+        </div>
+        <div class="absolute top-40 right-20 floating delay-2s">
+            <div class="glass-card w-20 h-20 rounded-full flex items-center justify-center">
+                <i class="fas fa-chart-bar text-2xl feature-icon"></i>
+            </div>
+        </div>
+        <div class="absolute bottom-40 left-20 floating delay-4s">
+            <div class="glass-card w-12 h-12 rounded-full flex items-center justify-center">
+                <i class="fas fa-target text-lg feature-icon"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="fitur" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    Fitur <span class="text-gradient">Unggulan</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Sistem canggih yang membantu Anda menemukan responden yang tepat dengan mudah dan efisien
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">                <!-- Feature 1 -->
+                <div class="feature-card glass-card rounded-2xl p-8 text-center hover:scale-105 transition-transform duration-300">
+                    <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center bg-gradient-1">
+                        <i class="fas fa-search text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Smart Matching</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Algoritma cerdas yang mencocokkan kuisioner Anda dengan responden yang sesuai kriteria dan topik penelitian.
+                    </p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="feature-card glass-card rounded-2xl p-8 text-center hover:scale-105 transition-transform duration-300">
+                    <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center bg-gradient-2">
+                        <i class="fas fa-user-check text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Profil Terverifikasi</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Setiap responden memiliki profil lengkap yang terverifikasi untuk memastikan kualitas dan relevansi data.
+                    </p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="feature-card glass-card rounded-2xl p-8 text-center hover:scale-105 transition-transform duration-300">
+                    <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center bg-gradient-3">
+                        <i class="fas fa-chart-line text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Real-time Analytics</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Dashboard lengkap dengan statistik real-time untuk memantau progress dan kualitas respons kuisioner.
+                    </p>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="feature-card glass-card rounded-2xl p-8 text-center hover:scale-105 transition-transform duration-300">
+                    <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center bg-gradient-4">
+                        <i class="fas fa-gift text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Sistem Reward</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Responden mendapat poin dan badge untuk setiap kuisioner yang diselesaikan, meningkatkan engagement.
+                    </p>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="feature-card glass-card rounded-2xl p-8 text-center hover:scale-105 transition-transform duration-300">
+                    <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center bg-gradient-5">
+                        <i class="fas fa-shield-alt text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Data Security</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Keamanan data terjamin dengan enkripsi end-to-end dan compliance dengan standar privasi internasional.
+                    </p>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="feature-card glass-card rounded-2xl p-8 text-center hover:scale-105 transition-transform duration-300">
+                    <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center bg-gradient-1">
+                        <i class="fas fa-mobile-alt text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Mobile Friendly</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Platform responsive yang dapat diakses dari mana saja, kapan saja melalui desktop maupun mobile.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="cara-kerja" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    Cara <span class="text-gradient">Kerja</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Hanya 4 langkah mudah untuk mendapatkan responden yang tepat untuk kuisioner Anda
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">                <!-- Step 1 -->
+                <div class="step-card text-center">
+                    <div class="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center relative bg-gradient-1">
+                        <span class="text-white text-2xl font-bold">1</span>
+                        <div class="absolute -top-2 -right-2 w-6 h-6 bg-yellow-400 rounded-full flex items-center justify-center">
+                            <i class="fas fa-star text-white text-xs"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Daftar & Buat Profil</h3>
+                    <p class="text-gray-600">
+                        Buat akun dan lengkapi profil penelitian Anda dengan detail yang diperlukan.
+                    </p>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="step-card text-center">
+                    <div class="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center relative bg-gradient-2">
+                        <span class="text-white text-2xl font-bold">2</span>
+                        <div class="absolute -top-2 -right-2 w-6 h-6 bg-green-400 rounded-full flex items-center justify-center">
+                            <i class="fas fa-check text-white text-xs"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Upload Kuisioner</h3>
+                    <p class="text-gray-600">
+                        Upload kuisioner Anda dan tentukan kriteria responden yang diinginkan.
+                    </p>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="step-card text-center">
+                    <div class="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center relative bg-gradient-3">
+                        <span class="text-white text-2xl font-bold">3</span>
+                        <div class="absolute -top-2 -right-2 w-6 h-6 bg-blue-400 rounded-full flex items-center justify-center">
+                            <i class="fas fa-sync text-white text-xs"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Smart Matching</h3>
+                    <p class="text-gray-600">
+                        Sistem akan mencocokkan kuisioner dengan responden yang sesuai kriteria.
+                    </p>
+                </div>
+                
+                <!-- Step 4 -->
+                <div class="step-card text-center">
+                    <div class="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center relative bg-gradient-4">
+                        <span class="text-white text-2xl font-bold">4</span>
+                        <div class="absolute -top-2 -right-2 w-6 h-6 bg-purple-400 rounded-full flex items-center justify-center">
+                            <i class="fas fa-chart-bar text-white text-xs"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Analisis Hasil</h3>
+                    <p class="text-gray-600">
+                        Dapatkan hasil kuisioner dan analisis mendalam melalui dashboard.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-20 liquid-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+                <div class="stats-item">
+                    <div class="text-4xl md:text-5xl font-bold text-white mb-2">10K+</div>
+                    <div class="text-white/80 text-lg">Peneliti Aktif</div>
+                </div>
+                <div class="stats-item">
+                    <div class="text-4xl md:text-5xl font-bold text-white mb-2">50K+</div>
+                    <div class="text-white/80 text-lg">Responden Terdaftar</div>
+                </div>
+                <div class="stats-item">
+                    <div class="text-4xl md:text-5xl font-bold text-white mb-2">100K+</div>
+                    <div class="text-white/80 text-lg">Kuisioner Diselesaikan</div>
+                </div>
+                <div class="stats-item">
+                    <div class="text-4xl md:text-5xl font-bold text-white mb-2">95%</div>
+                    <div class="text-white/80 text-lg">Tingkat Kepuasan</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="tentang" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="about-content">
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                        Tentang <span class="text-gradient">Respondly</span>
+                    </h2>
+                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                        Respondly lahir dari kebutuhan nyata para peneliti dan mahasiswa yang kesulitan 
+                        menemukan responden yang tepat untuk kuisioner mereka. Kami memahami betapa 
+                        pentingnya kualitas data dalam menghasilkan penelitian yang valid dan bermakna.
+                    </p>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        Dengan teknologi machine learning dan sistem matching yang canggih, kami 
+                        menghubungkan pembuat kuisioner dengan responden yang memiliki profil dan 
+                        expertise yang sesuai dengan kebutuhan penelitian.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button class="btn-glass px-8 py-3 rounded-full text-gray-800 font-semibold hover:scale-105 transition-transform">
+                            <i class="fas fa-info-circle mr-2"></i>
+                            Pelajari Lebih Lanjut
+                        </button>
+                        <button class="btn-glass px-8 py-3 rounded-full text-gray-800 font-semibold hover:scale-105 transition-transform">
+                            <i class="fas fa-phone mr-2"></i>
+                            Hubungi Kami
+                        </button>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="glass-card rounded-2xl p-8">                        <div class="grid grid-cols-2 gap-6">
+                            <div class="text-center">
+                                <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center bg-gradient-1">
+                                    <i class="fas fa-users text-white text-xl"></i>
+                                </div>
+                                <h4 class="font-bold text-gray-900 mb-2">Komunitas Besar</h4>
+                                <p class="text-sm text-gray-600">Ribuan peneliti dan responden aktif</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center bg-gradient-2">
+                                    <i class="fas fa-brain text-white text-xl"></i>
+                                </div>
+                                <h4 class="font-bold text-gray-900 mb-2">AI Powered</h4>
+                                <p class="text-sm text-gray-600">Teknologi machine learning terdepan</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center bg-gradient-3">
+                                    <i class="fas fa-clock text-white text-xl"></i>
+                                </div>
+                                <h4 class="font-bold text-gray-900 mb-2">Cepat & Efisien</h4>
+                                <p class="text-sm text-gray-600">Proses matching dalam hitungan menit</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center bg-gradient-4">
+                                    <i class="fas fa-star text-white text-xl"></i>
+                                </div>
+                                <h4 class="font-bold text-gray-900 mb-2">Kualitas Terjamin</h4>
+                                <p class="text-sm text-gray-600">Sistem verifikasi berlapis</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 liquid-bg">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
+                Siap Memulai Penelitian Anda?
+            </h2>
+            <p class="text-xl text-white/90 mb-8 leading-relaxed">
+                Bergabunglah dengan ribuan peneliti yang telah mempercayakan 
+                pengumpulan data mereka kepada Respondly
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="btn-glass px-8 py-4 rounded-full text-white font-semibold text-lg hover:scale-105 transition-transform">
+                    <i class="fas fa-user-plus mr-2"></i>
+                    Daftar Gratis Sekarang
+                </button>
+                <button class="btn-glass px-8 py-4 rounded-full text-white font-semibold text-lg hover:scale-105 transition-transform">
+                    <i class="fas fa-calendar mr-2"></i>
+                    Jadwalkan Demo
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="kontak" class="bg-gray-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="text-3xl font-bold mb-4 text-gradient">Respondly</div>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Platform terdepan untuk menghubungkan peneliti dengan responden 
+                        yang tepat. Dapatkan data berkualitas untuk riset yang lebih baik.
+                    </p>                    <div class="flex space-x-4">
+                        <a href="#" title="Facebook" class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" title="Twitter" class="w-10 h-10 bg-blue-400 rounded-full flex items-center justify-center hover:bg-blue-500 transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" title="LinkedIn" class="w-10 h-10 bg-blue-700 rounded-full flex items-center justify-center hover:bg-blue-800 transition-colors">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" title="Instagram" class="w-10 h-10 bg-pink-600 rounded-full flex items-center justify-center hover:bg-pink-700 transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Produk</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Fitur</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Harga</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">API</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Integrasi</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Dukungan</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Bantuan</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Kontak</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">FAQ</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Blog</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+                <p class="text-gray-400">
+                    &copy; 2025 Respondly. All rights reserved. Made with ❤️ for researchers everywhere.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hero animations
+            anime({
+                targets: '.hero-title',
+                translateY: [50, 0],
+                opacity: [0, 1],
+                duration: 1000,
+                easing: 'easeOutExpo'
+            });
+            
+            anime({
+                targets: '.hero-subtitle',
+                translateY: [30, 0],
+                opacity: [0, 1],
+                duration: 800,
+                delay: 300,
+                easing: 'easeOutExpo'
+            });
+            
+            anime({
+                targets: '.hero-buttons',
+                translateY: [20, 0],
+                opacity: [0, 1],
+                duration: 600,
+                delay: 600,
+                easing: 'easeOutExpo'
+            });
+            
+            // Feature cards animation
+            anime({
+                targets: '.feature-card',
+                translateY: [50, 0],
+                opacity: [0, 1],
+                duration: 800,
+                delay: anime.stagger(100),
+                easing: 'easeOutExpo'
+            });
+            
+            // Step cards animation
+            anime({
+                targets: '.step-card',
+                translateY: [30, 0],
+                opacity: [0, 1],
+                duration: 600,
+                delay: anime.stagger(150),
+                easing: 'easeOutExpo'
+            });
+            
+            // Stats animation
+            anime({
+                targets: '.stats-item',
+                scale: [0.8, 1],
+                opacity: [0, 1],
+                duration: 800,
+                delay: anime.stagger(200),
+                easing: 'easeOutElastic(1, .8)'
+            });
+            
+            // About content animation
+            anime({
+                targets: '.about-content',
+                translateX: [-50, 0],
+                opacity: [0, 1],
+                duration: 800,
+                easing: 'easeOutExpo'
+            });
+            
+            anime({
+                targets: '.about-image',
+                translateX: [50, 0],
+                opacity: [0, 1],
+                duration: 800,
+                delay: 200,
+                easing: 'easeOutExpo'
+            });
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-lg');
+            } else {
+                navbar.classList.remove('shadow-lg');
+            }
+        });
+        
+        // Add hover effects to buttons
+        document.querySelectorAll('.btn-glass').forEach(button => {
+            button.addEventListener('mouseenter', function() {
+                anime({
+                    targets: this,
+                    scale: 1.05,
+                    duration: 200,
+                    easing: 'easeOutQuad'
+                });
+            });
+            
+            button.addEventListener('mouseleave', function() {
+                anime({
+                    targets: this,
+                    scale: 1,
+                    duration: 200,
+                    easing: 'easeOutQuad'
+                });
+            });
+        });
+        
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe elements for scroll animations
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
